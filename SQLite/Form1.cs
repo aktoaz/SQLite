@@ -26,12 +26,17 @@ namespace SQLite
             SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=MyDatabase.sqlite;Version=3;");
             m_dbConnection.Open();
 
-            string sql = "create table highscores (name varchar(20), score int)";
+            //string sql = "create table highscores (name varchar(20), score int)";
+            string sql = @"CREATE TABLE artist (  
+                                artistid INTEGER PRIMARY KEY,
+                                artistname  TEXT
+                            )";
 
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
 
-            sql = "insert into highscores (name, score) values ('Me', 9001)";
+            //sql = "insert into highscores (name, score) values ('Me', 9001)";
+            sql = "insert into artist (artistname) values ('Phil Collins')";
 
             command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
@@ -46,14 +51,19 @@ namespace SQLite
             m_dbConnection.Open();
             using (m_dbConnection)
             {
-                SQLiteDataAdapter sda = new SQLiteDataAdapter("select * from highscores", m_dbConnection);
+                SQLiteDataAdapter sda = new SQLiteDataAdapter("select * from artist", m_dbConnection);
                 SQLiteDataReader dr = sda.SelectCommand.ExecuteReader();
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    label1.Text = dr["name"].ToString();
+                    label1.Text = dr["artistname"].ToString();
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
