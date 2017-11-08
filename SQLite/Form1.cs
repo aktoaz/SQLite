@@ -27,7 +27,7 @@ namespace SQLite
             m_dbConnection.Open();
 
             //string sql = "create table highscores (name varchar(20), score int)";
-            string sql = @"CREATE TABLE artist (  
+            string sql = @"CREATE TABLE IF NOT EXISTS artist (  
                                 artistid INTEGER PRIMARY KEY,
                                 artistname  TEXT
                             )";
@@ -61,9 +61,5 @@ namespace SQLite
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
